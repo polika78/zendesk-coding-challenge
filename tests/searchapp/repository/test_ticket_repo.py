@@ -33,6 +33,18 @@ class TestTicketRepo:
                     "Pennsylvania"
                 ]
             },
+            {
+                "_id": "8629d5fa-89c4-4e9b-9d9f-221b68b079f4",
+                "created_at": "2016-02-03T03:44:33-11:00",
+                "subject": "A Drama in Indonesia",
+                "assignee_id": 68,
+                "tags": [
+                    "Ohio",
+                    "Pennsylvania",
+                    "American Samoa",
+                    "Northern Mariana Islands"
+                ]
+            }
         ]
 
     def test_given_json_load_sets_tickets_and_indexing(self, ticket_records):
@@ -46,25 +58,29 @@ class TestTicketRepo:
         assert ticket_repo.indexing == {
             'created_at': {
                 "2016-04-28t11:19:34-10:00": ["436bf9b0-1147-4c0a-8439-6f79833bff5b"],
-                "2016-06-15t12:03:55-10:00": ["6aac0369-a7e5-4417-8b50-92528ef485d3"]
+                "2016-06-15t12:03:55-10:00": ["6aac0369-a7e5-4417-8b50-92528ef485d3"],
+                "2016-02-03t03:44:33-11:00": ["8629d5fa-89c4-4e9b-9d9f-221b68b079f4"]
             },
             'type': {
                 "incident": ["436bf9b0-1147-4c0a-8439-6f79833bff5b"],
-                "question": ["6aac0369-a7e5-4417-8b50-92528ef485d3"]
+                "question": ["6aac0369-a7e5-4417-8b50-92528ef485d3"],
+                "": ["8629d5fa-89c4-4e9b-9d9f-221b68b079f4"]
             },
             'subject': {
                 "a catastrophe in korea (north)": ["436bf9b0-1147-4c0a-8439-6f79833bff5b"],
-                "a nuisance in latvia": ["6aac0369-a7e5-4417-8b50-92528ef485d3"]
+                "a nuisance in latvia": ["6aac0369-a7e5-4417-8b50-92528ef485d3"],
+                "a drama in indonesia": ["8629d5fa-89c4-4e9b-9d9f-221b68b079f4"]
             },
             'assignee_id': {
                 "24": ["436bf9b0-1147-4c0a-8439-6f79833bff5b"],
-                "29": ["6aac0369-a7e5-4417-8b50-92528ef485d3"]
+                "29": ["6aac0369-a7e5-4417-8b50-92528ef485d3"],
+                "68": ["8629d5fa-89c4-4e9b-9d9f-221b68b079f4"]
             },
             'tags': {
-                "american samoa": ["436bf9b0-1147-4c0a-8439-6f79833bff5b"],
-                "northern mariana islands": ["436bf9b0-1147-4c0a-8439-6f79833bff5b"],
-                "ohio": ["436bf9b0-1147-4c0a-8439-6f79833bff5b", "6aac0369-a7e5-4417-8b50-92528ef485d3"],
-                "pennsylvania": ["436bf9b0-1147-4c0a-8439-6f79833bff5b", "6aac0369-a7e5-4417-8b50-92528ef485d3"],
+                "american samoa": ["436bf9b0-1147-4c0a-8439-6f79833bff5b", "8629d5fa-89c4-4e9b-9d9f-221b68b079f4"],
+                "northern mariana islands": ["436bf9b0-1147-4c0a-8439-6f79833bff5b", "8629d5fa-89c4-4e9b-9d9f-221b68b079f4"],
+                "ohio": ["436bf9b0-1147-4c0a-8439-6f79833bff5b", "6aac0369-a7e5-4417-8b50-92528ef485d3", "8629d5fa-89c4-4e9b-9d9f-221b68b079f4"],
+                "pennsylvania": ["436bf9b0-1147-4c0a-8439-6f79833bff5b", "6aac0369-a7e5-4417-8b50-92528ef485d3", "8629d5fa-89c4-4e9b-9d9f-221b68b079f4"],
                 "washington": ["6aac0369-a7e5-4417-8b50-92528ef485d3"],
                 "wyoming": ["6aac0369-a7e5-4417-8b50-92528ef485d3"],
             }
@@ -94,6 +110,14 @@ class TestTicketRepo:
 
         assert tickets == [Ticket(**ticket_records[0])]
 
+    def test_after_loaded_given_type_term_with_empty_string_search_by_term_returns_matched_tickets(self, ticket_records):
+        ticket_repo = TicketRepo()
+        ticket_repo.load(ticket_records)
+
+        tickets = ticket_repo.search_by_term("type", "")
+
+        assert tickets == [Ticket(**ticket_records[2])]
+
     def test_after_loaded_given_subject_term_search_by_term_returns_matched_tickets(self, ticket_records):
         ticket_repo = TicketRepo()
         ticket_repo.load(ticket_records)
@@ -116,4 +140,4 @@ class TestTicketRepo:
 
         tickets = ticket_repo.search_by_term("tags", "ohio")
 
-        assert tickets == [Ticket(**ticket_records[0]), Ticket(**ticket_records[1])]
+        assert tickets == [Ticket(**ticket_records[0]), Ticket(**ticket_records[1]), Ticket(**ticket_records[2])]

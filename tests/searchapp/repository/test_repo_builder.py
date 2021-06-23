@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from dataclasses import dataclass
 import pytest
 
@@ -11,6 +11,7 @@ class TestModel:
     tags: List[str]
     foreign_id: int
     active: bool
+    desc: Optional[str] = ''
 
 class TestRepoBuilder:
     
@@ -173,4 +174,11 @@ class TestRepoBuilder:
 
         assert indexed_map == {
             'true': ["1", "5"]
+        }
+
+    def test_given_data_and_missing_term_value_build_search_index_returns_indexed_map_with_empty_str(self, input_data):
+        indexed_map = RepoBuilder.build_search_index('desc', input_data)
+
+        assert indexed_map == {
+            '': ['1']
         }

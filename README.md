@@ -38,7 +38,7 @@ $ mypy .
 * _id of users and tickets are unique as primary key
 * Optional fields:
     * User: no optional fields
-    * Ticket: assignee_id, tags
+    * Ticket: type, assignee_id
 * Empty string will be used to search missing values
 * Full value matching and case-insensitive searching
 

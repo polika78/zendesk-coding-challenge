@@ -1,12 +1,12 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional, Union
 
 
 @dataclass
 class Ticket:
     _id: int
     created_at: str
-    type: str
     subject: str
-    assignee_id: int
     tags: List[str]
+    type: Optional[str] = ''
+    assignee_id: Optional[Union[int, str]] = ''
