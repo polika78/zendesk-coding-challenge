@@ -114,6 +114,13 @@ class TestRepoBuilder:
             'bar': ["1"]
         }
 
+    def test_given_data_and_bool_type_term_build_search_index_returns_indexed_map(self, input_data):
+        indexed_map = RepoBuilder.build_search_index('active', input_data)
+
+        assert indexed_map == {
+            'true': ["1"]
+        }
+
     def test_given_multiple_records_and_model_func_build_data_returns_id_indexed_data(self, input_multiple_records):
         def create_test_model(raw):
             return TestModel(**raw)
@@ -131,8 +138,8 @@ class TestRepoBuilder:
             "5": TestModel(
                 _id=5,
                 name="Tom",
-                tags=["Bar", "Foo"],
-                foreign_id=100,
+                tags=["Bar", "foo"],
+                foreign_id=200,
                 active=True
             )
         }
@@ -159,4 +166,11 @@ class TestRepoBuilder:
         assert indexed_map == {
             'foo': ["1", "5"],
             'bar': ["1", "5"]
+        }
+
+    def test_given_multiple_data_and_bool_type_term_build_search_index_returns_indexed_map(self, input_multiple_data):
+        indexed_map = RepoBuilder.build_search_index('active', input_multiple_data)
+
+        assert indexed_map == {
+            'true': ["1", "5"]
         }
