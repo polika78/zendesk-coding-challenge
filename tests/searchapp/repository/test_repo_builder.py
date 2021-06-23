@@ -67,3 +67,11 @@ class TestRepoBuilder:
         assert indexed_map == {
             "100": ["1"]
         }
+
+    def test_given_data_and_array_type_term_build_search_index_returns_indexed_map(self, input_data):
+        indexed_map = RepoBuilder.build_search_index('tags', input_data)
+
+        assert indexed_map == {
+            'foo': ["1"],
+            'bar': ["1"]
+        }
