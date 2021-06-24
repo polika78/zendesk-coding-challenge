@@ -7,6 +7,7 @@ from searchapp.repository.models.user import User
 from searchapp.repository.models.ticket import Ticket
 from searchapp.models.user_result import UserResult
 from searchapp.models.ticket_result import TicketResult
+from searchapp.models.search_terms import SearchTerms
 
 
 class TestSearchService:
@@ -293,3 +294,23 @@ class TestSearchService:
         assert search_service.search_tickets('_id', "x") == expected_search_result
         mock_ticket_repo_search_by_term.assert_called_once_with('_id', 'x')
         mock_user_repo_search_by_term.assert_not_called()
+
+    def test_get_user_search_terms_returns_user_terms(self):
+
+        user_repo = UserRepo()
+        ticket_repo = TicketRepo()
+        search_service = SearchService(user_repo, ticket_repo)
+        expected_result = SearchTerms(
+            terms=["name", "created_at", "verified"]
+        )
+        assert search_service.get_user_search_terms() == expected_result
+
+    def test_get_ticket_search_terms_returns_ticket_terms(self):
+    
+        user_repo = UserRepo()
+        ticket_repo = TicketRepo()
+        search_service = SearchService(user_repo, ticket_repo)
+        expected_result = SearchTerms(
+            terms=["created_at", "type", "subject", "assignee_id", "tags"]
+        )
+        assert search_service.get_ticket_search_terms() == expected_result
