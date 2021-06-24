@@ -74,3 +74,11 @@ class TestUserRepo:
         users = user_repo.search_by_term("verified", "True")
 
         assert users == [User(**user_records[0]), User(**user_records[1])]
+
+    def test_after_loaded_given_not_found_term_search_by_term_returns_empty_users(self, user_records):
+        user_repo = UserRepo()
+        user_repo.load(user_records)
+
+        users = user_repo.search_by_term("name", "Foo")
+
+        assert users == []

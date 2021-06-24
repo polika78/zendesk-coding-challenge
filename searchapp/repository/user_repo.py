@@ -21,4 +21,4 @@ class UserRepo:
     def search_by_term(self, term: str, value: str) -> List[User]:
         if term == "_id":
             return [self.users[value]]
-        return [self.users[id] for id in self.indexing[term][value.lower()]]
+        return [self.users[id] for id in self.indexing[term].get(value.lower(), [])]
