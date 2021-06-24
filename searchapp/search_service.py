@@ -1,6 +1,7 @@
 from typing import List
 
-from searchapp.models.search_terms import SearchTerms
+from searchapp.models.user_terms import UserTerms
+from searchapp.models.ticket_terms import TicketTerms
 from searchapp.models.user_result import UserResult
 from searchapp.models.ticket_result import TicketResult
 from searchapp.repository.user_repo import UserRepo
@@ -11,8 +12,8 @@ class SearchService:
         self.user_repo = user_repo
         self.ticket_repo = ticket_repo
 
-    def get_user_search_terms(self) -> SearchTerms:
-        return SearchTerms(terms=self.user_repo.indexes)
+    def get_user_search_terms(self) -> UserTerms:
+        return UserTerms(terms=["_id", *self.user_repo.indexes])
 
     def search_user(self, term: str, value: str) -> List[UserResult]:
         users = self.user_repo.search_by_term(term, value)
@@ -23,8 +24,8 @@ class SearchService:
             ) for user in users
         ]
 
-    def get_ticket_search_terms(self) -> SearchTerms:
-        return SearchTerms(terms=self.ticket_repo.indexes)
+    def get_ticket_search_terms(self) -> TicketTerms:
+        return TicketTerms(terms=["_id", *self.ticket_repo.indexes])
 
     def search_tickets(self, term: str, value: str) -> List[TicketResult]:
         tickets = self.ticket_repo.search_by_term(term, value)
