@@ -82,3 +82,11 @@ class TestUserRepo:
         users = user_repo.search_by_term("name", "Foo")
 
         assert users == []
+
+    def test_after_loaded_given_not_found_id_search_by_term_returns_empty_users(self, user_records):
+        user_repo = UserRepo()
+        user_repo.load(user_records)
+
+        users = user_repo.search_by_term("_id", "900")
+
+        assert users == []

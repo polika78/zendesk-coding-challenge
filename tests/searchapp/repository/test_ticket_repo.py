@@ -149,3 +149,11 @@ class TestTicketRepo:
         tickets = ticket_repo.search_by_term("tags", "foo")
 
         assert tickets == []
+
+    def test_after_loaded_given_not_found_id_search_by_term_returns_empty(self, ticket_records):
+        ticket_repo = TicketRepo()
+        ticket_repo.load(ticket_records)
+
+        tickets = ticket_repo.search_by_term("_id", "400")
+
+        assert tickets == []

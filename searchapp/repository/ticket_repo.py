@@ -21,5 +21,5 @@ class TicketRepo:
 
     def search_by_term(self, term: str, value: str) -> List[Ticket]:
         if term == "_id":
-            return [self.tickets[value]]
+            return [self.tickets.get(value)] if self.tickets.get(value) else []
         return [self.tickets[id] for id in self.indexing[term].get(value.lower(), [])]
