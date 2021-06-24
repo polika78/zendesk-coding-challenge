@@ -17,7 +17,6 @@ class TestUserRepo:
                 "_id": 2,
                 "name": "Cross Barlow",
                 "created_at": "2016-06-23T10:31:39-10:00",
-                "verified": True
             }
         ]
 
@@ -39,7 +38,8 @@ class TestUserRepo:
                 "2016-06-23t10:31:39-10:00": ["2"]
             },
             'verified': {
-                "true": ["1", "2"]
+                "true": ["1"],
+                "": ["2"]
             }
         }
 
@@ -73,7 +73,15 @@ class TestUserRepo:
 
         users = user_repo.search_by_term("verified", "True")
 
-        assert users == [User(**user_records[0]), User(**user_records[1])]
+        assert users == [User(**user_records[0])]
+
+    def test_after_loaded_given_verified_empty_term_search_by_term_returns_matched_users(self, user_records):
+        user_repo = UserRepo()
+        user_repo.load(user_records)
+
+        users = user_repo.search_by_term("verified", "")
+
+        assert users == [User(**user_records[1])]
 
     def test_after_loaded_given_not_found_term_search_by_term_returns_empty_users(self, user_records):
         user_repo = UserRepo()
