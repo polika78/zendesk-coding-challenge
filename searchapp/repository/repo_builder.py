@@ -15,7 +15,7 @@ class RepoBuilder:
             if isinstance(getattr(data[id], term), list):
                 value_map = [(str(value).lower(), id) for value in getattr(data[id], term)]
             else:
-                value_map = [(getattr(data[id], term), id)]
+                value_map = [(str(getattr(data[id], term)).lower(), id)]
 
             new_result_map = [
                 *result_map,

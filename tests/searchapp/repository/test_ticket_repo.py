@@ -37,7 +37,6 @@ class TestTicketRepo:
                 "_id": "8629d5fa-89c4-4e9b-9d9f-221b68b079f4",
                 "created_at": "2016-02-03T03:44:33-11:00",
                 "subject": "A Drama in Indonesia",
-                "assignee_id": 68,
                 "tags": [
                     "Ohio",
                     "Pennsylvania",
@@ -74,7 +73,7 @@ class TestTicketRepo:
             'assignee_id': {
                 "24": ["436bf9b0-1147-4c0a-8439-6f79833bff5b"],
                 "29": ["6aac0369-a7e5-4417-8b50-92528ef485d3"],
-                "68": ["8629d5fa-89c4-4e9b-9d9f-221b68b079f4"]
+                "": ["8629d5fa-89c4-4e9b-9d9f-221b68b079f4"]
             },
             'tags': {
                 "american samoa": ["436bf9b0-1147-4c0a-8439-6f79833bff5b", "8629d5fa-89c4-4e9b-9d9f-221b68b079f4"],
@@ -133,6 +132,14 @@ class TestTicketRepo:
         tickets = ticket_repo.search_by_term("assignee_id", "24")
 
         assert tickets == [Ticket(**ticket_records[0])]
+
+    def test_after_loaded_given_assignee_id_term_with_empty_string_search_by_term_returns_matched_tickets(self, ticket_records):
+        ticket_repo = TicketRepo()
+        ticket_repo.load(ticket_records)
+
+        tickets = ticket_repo.search_by_term("assignee_id", "")
+
+        assert tickets == [Ticket(**ticket_records[2])]
 
     def test_after_loaded_given_tags_term_search_by_term_returns_matched_tickets(self, ticket_records):
         ticket_repo = TicketRepo()
