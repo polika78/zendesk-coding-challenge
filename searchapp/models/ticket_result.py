@@ -8,3 +8,9 @@ from searchapp.repository.models.ticket import Ticket
 class TicketResult:
     ticket: Ticket
     assignee: Optional[User] = None
+
+    def __str__(self):
+        return f"""
+{self.ticket}
+Assignee User
+{self.assignee}"""

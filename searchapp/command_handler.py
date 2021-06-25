@@ -1,27 +1,27 @@
-from typing import Callable, Union
+from typing import List, Union
 
 from searchapp.search_service import SearchService
-from searchapp.repository.user_repo import UserRepo
-from searchapp.repository.ticket_repo import TicketRepo
+from searchapp.commands.list_searchable_fields_command import ListSearchableFieldsCommand
+from searchapp.commands.search_users_by_term_command import SearchUsersByTermCommand
+from searchapp.commands.search_tickets_by_term_command import SearchTicketsByTermCommand
+from searchapp.errors.command_not_found_error import CommandNotFoundError
 
 class CommandHandler:
 
     def __init__(self, search_service: SearchService) -> None:
         self.search_service = search_service
 
-    def command_parser(self, command: str) -> Callable:
-        command_map = {
-            'get_search_terms': self.get_search_terms,
-        }
-        return command_map[command]
+    def command_parser(self, command_str: str) -> \
+        Union[ListSearchableFieldsCommand, SearchUsersByTermCommand, SearchTicketsByTermCommand]:
+        if command_str == "list_searchable_fields":
+            return ListSearchableFieldsCommand(self.search_service)
+        elif command_str == "search_users_by_term":
+            return SearchUsersByTermCommand(self.search_service)
+        elif command_str == "search_tickets_by_term":
+            return SearchTicketsByTermCommand(self.search_service)
+        raise CommandNotFoundError()
 
-    def get_search_terms(self, repo: Union[UserRepo, TicketRepo]) -> None:
-        if repo == 'user':
-            print(self.search_service.get_user_search_terms())
-        elif repo == 'ticket':
-            print(self.search_service.get_ticket_search_terms())
+    def handle(self, command_str: str, args: List[str]) -> None:
+        command = self.command_parser(command_str)
 
-    def handle(self, command: str, args: str) -> None:
-        command_func = self.command_parser(command)
-
-        command_func(args)
+        command.run(args)

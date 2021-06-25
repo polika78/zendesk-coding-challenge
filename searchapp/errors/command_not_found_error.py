@@ -1,0 +1,3 @@
+
+class CommandNotFoundError(Exception):
+    pass
