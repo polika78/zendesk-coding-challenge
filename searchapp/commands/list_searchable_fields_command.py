@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List
 
 from searchapp.models.search_result.user_terms import UserTerms
 from searchapp.models.search_result.ticket_terms import TicketTerms
@@ -6,15 +6,13 @@ from searchapp.commands.command import Command
 
 class ListSearchableFieldsCommand(Command):
 
-    def display(self, result: List[Union[UserTerms, TicketTerms]]) -> None:
-        print(result)
+    def display(self, user_terms: UserTerms, ticket_terms: TicketTerms) -> None:
+        print(user_terms)
+        print(ticket_terms)
 
-    def run(self, args: List[str]) -> None:
-        repo, = args
+    def run(self, args: List) -> None:
 
-        if repo == 'user':
-            result = self.search_service.get_user_search_terms()
-        elif repo == 'ticket':
-            result = self.search_service.get_ticket_search_terms()
+        user_terms = self.search_service.get_user_search_terms()
+        ticket_terms = self.search_service.get_ticket_search_terms()
 
-        self.display(result)
+        self.display(user_terms, ticket_terms)

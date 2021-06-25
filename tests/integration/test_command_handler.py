@@ -30,13 +30,13 @@ class TestCommandHandler:
     def search_service(self, user_repo, ticket_repo):
         return SearchService(user_repo, ticket_repo)
 
-    def test_list_searchable_fields_for_user_returns_search_terms(
+    def test_list_searchable_fields_returns_searchable_fields(
         self, capfd,
         search_service):
 
         command_handler = CommandHandler(search_service)
 
-        command_handler.handle('list_searchable_fields', ['user'])
+        command_handler.handle('list_searchable_fields', [])
 
         out, _ = capfd.readouterr()
         assert out == """
@@ -45,18 +45,7 @@ _id
 name
 created_at
 verified
-"""
 
-    def test_list_searchable_fields_for_ticket_returns_search_terms(
-        self, capfd,
-        search_service):
-
-        command_handler = CommandHandler(search_service)
-
-        command_handler.handle('list_searchable_fields', ['ticket'])
-
-        out, _ = capfd.readouterr()
-        assert out == """
 Search Tickets with
 _id
 created_at
