@@ -1,6 +1,6 @@
 import pytest
 
-from searchapp.repository.models.ticket import Ticket
+from searchapp.models.ticket import Ticket
 from searchapp.repository.ticket_repo import TicketRepo
 
 class TestTicketRepo:

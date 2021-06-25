@@ -1,6 +1,6 @@
 from typing import List
 
-from searchapp.models.user_result import UserResult
+from searchapp.models.search_result.user_result import UserResult
 from searchapp.commands.command import Command
 
 class SearchUsersByTermCommand(Command):

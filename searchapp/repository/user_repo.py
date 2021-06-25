@@ -1,6 +1,6 @@
 from typing import List
 
-from searchapp.repository.models.user import User
+from searchapp.models.user import User
 from searchapp.repository.repo_builder import RepoBuilder
 
 class UserRepo:

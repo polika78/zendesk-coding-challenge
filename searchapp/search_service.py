@@ -1,9 +1,9 @@
 from typing import List
 
-from searchapp.models.user_terms import UserTerms
-from searchapp.models.ticket_terms import TicketTerms
-from searchapp.models.user_result import UserResult
-from searchapp.models.ticket_result import TicketResult
+from searchapp.models.search_result.user_terms import UserTerms
+from searchapp.models.search_result.ticket_terms import TicketTerms
+from searchapp.models.search_result.user_result import UserResult
+from searchapp.models.search_result.ticket_result import TicketResult
 from searchapp.repository.user_repo import UserRepo
 from searchapp.repository.ticket_repo import TicketRepo
 class SearchService:

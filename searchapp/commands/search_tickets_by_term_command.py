@@ -1,6 +1,6 @@
 from typing import List
 
-from searchapp.models.ticket_result import TicketResult
+from searchapp.models.search_result.ticket_result import TicketResult
 from searchapp.commands.command import Command
 
 class SearchTicketsByTermCommand(Command):

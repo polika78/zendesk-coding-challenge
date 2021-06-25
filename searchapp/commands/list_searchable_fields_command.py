@@ -1,7 +1,7 @@
 from typing import List, Union
 
-from searchapp.models.user_terms import UserTerms
-from searchapp.models.ticket_terms import TicketTerms
+from searchapp.models.search_result.user_terms import UserTerms
+from searchapp.models.search_result.ticket_terms import TicketTerms
 from searchapp.commands.command import Command
 
 class ListSearchableFieldsCommand(Command):

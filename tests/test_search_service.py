@@ -3,12 +3,12 @@ from unittest.mock import patch
 from searchapp.search_service import SearchService
 from searchapp.repository.ticket_repo import TicketRepo
 from searchapp.repository.user_repo import UserRepo
-from searchapp.repository.models.user import User
-from searchapp.repository.models.ticket import Ticket
-from searchapp.models.user_result import UserResult
-from searchapp.models.ticket_result import TicketResult
-from searchapp.models.user_terms import UserTerms
-from searchapp.models.ticket_terms import TicketTerms
+from searchapp.models.user import User
+from searchapp.models.ticket import Ticket
+from searchapp.models.search_result.user_result import UserResult
+from searchapp.models.search_result.ticket_result import TicketResult
+from searchapp.models.search_result.user_terms import UserTerms
+from searchapp.models.search_result.ticket_terms import TicketTerms
 
 
 class TestSearchService:

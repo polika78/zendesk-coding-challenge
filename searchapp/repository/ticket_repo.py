@@ -1,6 +1,6 @@
 from typing import List
 
-from searchapp.repository.models.ticket import Ticket
+from searchapp.models.ticket import Ticket
 from searchapp.repository.repo_builder import RepoBuilder
 
 

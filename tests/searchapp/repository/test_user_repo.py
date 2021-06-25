@@ -1,6 +1,6 @@
 import pytest
 
-from searchapp.repository.models.user import User
+from searchapp.models.user import User
 from searchapp.repository.user_repo import UserRepo
 
 class TestUserRepo:
