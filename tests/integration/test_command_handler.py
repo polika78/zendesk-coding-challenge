@@ -82,20 +82,20 @@ assignee_id: 12
 tags: ['California', 'Palau', 'Kentucky', 'North Carolina']
 
 
-_id: 50f3fdbd-f8a6-481d-9bf7-572972856628
-created_at: 2016-05-19T08:52:06-10:00
-type: incident
-subject: A Nuisance in Namibia
-assignee_id: 12
-tags: ['Maine', 'West Virginia', 'Michigan', 'Florida']
-
-
 _id: 774765fe-7123-4131-8822-e855d3cad14c
 created_at: 2016-06-23T06:08:21-10:00
 type: task
 subject: A Drama in Germany
 assignee_id: 12
 tags: ['Mississippi', 'Marshall Islands', 'Şouth Dakota', 'Montana']
+
+
+_id: 50f3fdbd-f8a6-481d-9bf7-572972856628
+created_at: 2016-05-19T08:52:06-10:00
+type: incident
+subject: A Nuisance in Namibia
+assignee_id: 12
+tags: ['Maine', 'West Virginia', 'Michigan', 'Florida']
 
 """
     def test_search_by_term_for_ticket_returns_tickets(
@@ -185,14 +185,6 @@ created_at: 2016-01-03T02:38:58-11:00
 verified: 
 
 
-_id: 50dfc8bc-31de-411e-92bf-a6d6b9dfa490
-created_at: 2016-03-08T09:44:54-11:00
-type: task
-subject: A Problem in South Africa
-assignee_id: 54
-tags: ['Georgia', 'Tennessee', 'Mississippi', 'Marshall Islands']
-
-
 _id: 828c158a-91e3-42b9-8aed-ac97407a150f
 created_at: 2016-04-10T11:55:28-10:00
 type: task
@@ -207,6 +199,14 @@ type: task
 subject: A Drama in Albania
 assignee_id: 54
 tags: ['South Carolina', 'Indiana', 'New Mexico', 'Nebraska']
+
+
+_id: 50dfc8bc-31de-411e-92bf-a6d6b9dfa490
+created_at: 2016-03-08T09:44:54-11:00
+type: task
+subject: A Problem in South Africa
+assignee_id: 54
+tags: ['Georgia', 'Tennessee', 'Mississippi', 'Marshall Islands']
 
 
 _id: 55
@@ -246,6 +246,28 @@ tags: ['Georgia', 'Tennessee', 'Mississippi', 'Marshall Islands']
 Searching Tickets for assignee_id with a value 
 
 
+_id: e68d8bfd-9826-42fd-9692-add445aa7430
+created_at: 2016-06-30T06:59:04-10:00
+type: question
+subject: A Catastrophe in Falkland Islands (Malvinas)
+assignee_id: 
+tags: ['Georgia', 'Tennessee', 'Mississippi', 'Marshall Islands']
+
+Assignee User
+None
+
+
+_id: c68cb7d7-b517-4d0b-a826-9605423e78c2
+created_at: 2016-03-09T01:39:48-11:00
+type: task
+subject: A Problem in Western Sahara
+assignee_id: 
+tags: ['Massachusetts', 'New York', 'Minnesota', 'New Jersey']
+
+Assignee User
+None
+
+
 _id: 17951590-6a78-49e8-8e45-1d4326ba49cc
 created_at: 2016-06-28T03:29:34-10:00
 type: incident
@@ -263,28 +285,6 @@ type: question
 subject: A Problem in Antigua and Barbuda
 assignee_id: 
 tags: ['American Samoa', 'Northern Mariana Islands', 'Puerto Rico', 'Idaho']
-
-Assignee User
-None
-
-
-_id: c68cb7d7-b517-4d0b-a826-9605423e78c2
-created_at: 2016-03-09T01:39:48-11:00
-type: task
-subject: A Problem in Western Sahara
-assignee_id: 
-tags: ['Massachusetts', 'New York', 'Minnesota', 'New Jersey']
-
-Assignee User
-None
-
-
-_id: e68d8bfd-9826-42fd-9692-add445aa7430
-created_at: 2016-06-30T06:59:04-10:00
-type: question
-subject: A Catastrophe in Falkland Islands (Malvinas)
-assignee_id: 
-tags: ['Georgia', 'Tennessee', 'Mississippi', 'Marshall Islands']
 
 Assignee User
 None
