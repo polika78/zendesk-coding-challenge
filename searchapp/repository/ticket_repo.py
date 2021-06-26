@@ -2,6 +2,7 @@ from typing import List
 
 from searchapp.models.ticket import Ticket
 from searchapp.repository.repo_builder import RepoBuilder
+from searchapp.errors.unknown_search_term_error import UnknownSearchTermError
 
 
 class TicketRepo:
@@ -22,4 +23,6 @@ class TicketRepo:
     def search_by_term(self, term: str, value: str) -> List[Ticket]:
         if term == "_id":
             return [self.tickets.get(value)] if self.tickets.get(value) else []
+        if not self.indexing.get(term):
+            raise UnknownSearchTermError()
         return [self.tickets[id] for id in self.indexing[term].get(value.lower(), [])]

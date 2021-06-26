@@ -2,6 +2,7 @@ import pytest
 
 from searchapp.models.ticket import Ticket
 from searchapp.repository.ticket_repo import TicketRepo
+from searchapp.errors.unknown_search_term_error import UnknownSearchTermError
 
 class TestTicketRepo:
     @pytest.fixture
@@ -164,3 +165,10 @@ class TestTicketRepo:
         tickets = ticket_repo.search_by_term("_id", "400")
 
         assert tickets == []
+
+    def test_after_loaded_given_unknown_search_term_search_by_term_raise_unknown_search_term_error(self, ticket_records):
+        ticket_repo = TicketRepo()
+        ticket_repo.load(ticket_records)
+
+        with pytest.raises(UnknownSearchTermError) as e:
+            ticket_repo.search_by_term("unknown", "900")

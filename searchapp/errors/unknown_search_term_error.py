@@ -1,0 +1,2 @@
+class UnknownSearchTermError(Exception):
+    pass

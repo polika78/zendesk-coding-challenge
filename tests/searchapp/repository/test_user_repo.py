@@ -2,6 +2,7 @@ import pytest
 
 from searchapp.models.user import User
 from searchapp.repository.user_repo import UserRepo
+from searchapp.errors.unknown_search_term_error import UnknownSearchTermError
 
 class TestUserRepo:
     @pytest.fixture
@@ -98,3 +99,10 @@ class TestUserRepo:
         users = user_repo.search_by_term("_id", "900")
 
         assert users == []
+
+    def test_after_loaded_given_unknown_search_term_search_by_term_raise_unknown_search_term_error(self, user_records):
+        user_repo = UserRepo()
+        user_repo.load(user_records)
+
+        with pytest.raises(UnknownSearchTermError) as e:
+            user_repo.search_by_term("unknown", "900")

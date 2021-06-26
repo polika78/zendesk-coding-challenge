@@ -2,6 +2,7 @@ from typing import List
 
 from searchapp.models.user import User
 from searchapp.repository.repo_builder import RepoBuilder
+from searchapp.errors.unknown_search_term_error import UnknownSearchTermError
 
 class UserRepo:
 
@@ -21,4 +22,6 @@ class UserRepo:
     def search_by_term(self, term: str, value: str) -> List[User]:
         if term == "_id":
             return [self.users.get(value)] if self.users.get(value) else []
+        if not self.indexing.get(term):
+            raise UnknownSearchTermError()
         return [self.users[id] for id in self.indexing[term].get(value.lower(), [])]
