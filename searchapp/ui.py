@@ -2,7 +2,7 @@
 class UI:
     WELCOME_MESSAGE="""
 Welcome to Zendesk Search
-Type 'quie' to exit at any time, Press 'Enter' to continue
+Type 'quit' to exit at any time, Press 'Enter' to continue
 """
     INSTRUCTION_MESSAGE="""
             Select Search options:
