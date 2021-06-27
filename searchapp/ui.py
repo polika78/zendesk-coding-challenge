@@ -26,6 +26,8 @@ Type 'quit' to exit at any time, Press 'Enter' to continue
             repo = input("Select 1) Users or 2) Tickets\n")
             if repo == 'quit':
                 return 'quit', None
+            if repo not in ('1', '2'):
+                return 'unknown', None
             search_term = input("Enter search term\n")
             if search_term == 'quit':
                 return 'quit', None

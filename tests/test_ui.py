@@ -21,6 +21,18 @@ class TestUI:
 
         assert ui.input_handler() == ('1', ('1', '_id', '5'))
 
+    def test_given_inputs_when_input_handler_calls_returns_first_entry_and_sub_entries(self):
+        input_values = ['1', '3', '_id']
+    
+        def mock_input(s):
+            return input_values.pop(0)
+
+        searchapp.ui.input = mock_input
+        ui = searchapp.ui.UI()
+
+        assert ui.input_handler() == ('unknown', None)
+        assert len(input_values) == 1
+
     def test_given_quit_input_when_input_handler_calls_stops_input_and_returns_quit_entry(self):
         input_values = ['quit', '1', '_id', '5']
     
