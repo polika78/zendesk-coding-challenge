@@ -4,7 +4,7 @@ die () { echo "$1" >&2; exit 1; }
 
 hash docker || { die "docker is not installed. Exiting..."; }
 
-dockerOptions="-v """$(pwd):/opt/code/searchapp""""
+dockerOptions="-v """$(pwd):/opt/code/""""
 tag="searchapp-test"
 dockerRun="docker run $dockerOptions -t $tag"
 

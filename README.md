@@ -35,7 +35,7 @@ $ ./script/run.sh
 ![Design Diagram](./design-diagram.jpg)
 ## Data structure for repo
 Repo data has two hashmap tables. One table stores raw data as objects with _id key. The other table is indexing table which of key is field name and value is sub hashmap table which of key is field's value and value is a list of _ids.
-eg)
+
 ```
 {
     "1": {"_id": 1, "name": "james"}
