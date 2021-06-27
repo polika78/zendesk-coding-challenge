@@ -33,7 +33,7 @@ class TestUI:
         assert ui.input_handler() == ('quit', None)
         assert len(input_values) == 3
 
-    def test_given_quit_input_in_sub_entries_when_input_handler_calls_stops_input_and_returns_quit_entry(self):
+    def test_given_quit_input_in_first_sub_entries_when_input_handler_calls_stops_input_and_returns_quit_entry(self):
         input_values = ['1', 'quit', '_id', '5']
     
         def mock_input(s):
@@ -44,6 +44,18 @@ class TestUI:
 
         assert ui.input_handler() == ('quit', None)
         assert len(input_values) == 2
+
+    def test_given_quit_input_in_second_sub_entries_when_input_handler_calls_stops_input_and_returns_quit_entry(self):
+        input_values = ['1', '1', 'quit', '5']
+
+        def mock_input(s):
+            return input_values.pop(0)
+
+        searchapp.ui.input = mock_input
+        ui = searchapp.ui.UI()
+
+        assert ui.input_handler() == ('quit', None)
+        assert len(input_values) == 1
 
     def test_given_entries_for_searching_users_when_parse_command_calls_returns_searching_users_command_string_and_args(self):
         ui = searchapp.ui.UI()
