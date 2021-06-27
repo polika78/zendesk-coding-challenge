@@ -1,5 +1,5 @@
 
-from searchapp.models.search_result.command_result import CommandResult
+from searchapp.models.command_result import CommandResult
 
 class UI:
     WELCOME_MESSAGE="""

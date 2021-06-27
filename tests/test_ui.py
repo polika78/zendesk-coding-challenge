@@ -1,5 +1,5 @@
 import searchapp.ui
-from searchapp.models.search_result.command_result import CommandResult
+from searchapp.models.command_result import CommandResult
 from searchapp.models.search_result.user_result import UserResult
 from searchapp.models.search_result.ticket_result import TicketResult
 from searchapp.models.search_result.user_searchable_fields import UserSearchableFields

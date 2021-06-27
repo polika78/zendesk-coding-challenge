@@ -10,11 +10,11 @@ from searchapp.errors.unknown_search_term_error import UnknownSearchTermError
 
 
 def create_repos():
-    with open('./tests/resources/users.json') as users_file:
+    with open('./searchapp/repository/data/users.json') as users_file:
         users_records = json.load(users_file)
     user_repo = UserRepo()
     user_repo.load(users_records)
-    with open('./tests/resources/tickets.json') as tickets_file:
+    with open('./searchapp/repository/data/tickets.json') as tickets_file:
         ticket_records = json.load(tickets_file)
     ticket_repo = TicketRepo()
     ticket_repo.load(ticket_records)

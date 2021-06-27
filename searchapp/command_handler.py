@@ -5,7 +5,7 @@ from searchapp.commands.list_searchable_fields_command import ListSearchableFiel
 from searchapp.commands.search_users_by_term_command import SearchUsersByTermCommand
 from searchapp.commands.search_tickets_by_term_command import SearchTicketsByTermCommand
 from searchapp.errors.command_not_found_error import CommandNotFoundError
-from searchapp.models.search_result.command_result import CommandResult
+from searchapp.models.command_result import CommandResult
 
 class CommandHandler:
 

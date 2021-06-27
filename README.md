@@ -7,24 +7,19 @@ This is an application which enables for user to search users and tickets with t
 * Recommended python version - 3.9
 * test framework - pytest
 * type checking - mypy
-
-
-## How to install packages
-
-```bash
-$ pip install -r requirements-dev.txt
-```
+* Docker
+    - Recommend to use dockerised scripts to run app and test
 
 ## How to run test
 
 ```bash
-$ pytest
+$ ./script/test.sh
 ```
 
-## How to run type checking
+## How to run application
 
 ```bash
-$ mypy .
+$ ./script/run.sh
 ```
 
 ## Design models
@@ -60,7 +55,7 @@ This data structure gives O(n) complexity for searching by using hashmap. But it
     * Ticket: type, assignee_id
 * Empty string will be used to search missing values
 * Full value matching and case-insensitive searching
-
+* user and ticket data are embedded in application. App does not support to change data.
 
 ## Design decisions
 * Repository for ticket and user
@@ -75,4 +70,6 @@ This data structure gives O(n) complexity for searching by using hashmap. But it
 |RepoBuilder will update indexed map data structure for each field|It requires calling building function multiple times, so it will take more time compared with building all fields indexed map with one building call|It can just store required fields indexed map, so it could save memory.|
 
 
-## Limitations
+## How to run application
+
+
