@@ -1,4 +1,11 @@
 import searchapp.ui
+from searchapp.models.search_result.command_result import CommandResult
+from searchapp.models.search_result.user_result import UserResult
+from searchapp.models.search_result.ticket_result import TicketResult
+from searchapp.models.search_result.user_searchable_fields import UserSearchableFields
+from searchapp.models.search_result.ticket_searchable_fields import TicketSearchableFields
+from searchapp.models.user import User
+from searchapp.models.ticket import Ticket
 
 
 class TestUI:
@@ -67,3 +74,131 @@ class TestUI:
 
         assert ui.parse_command('1', ('foo', '_id', '1')) \
             == ('undefined', [])
+
+    def test_given_command_result_with_title_and_result_list_for_user_when_display_command_result_then_it_displays_title_and_result_list(self, capfd):
+        ui = searchapp.ui.UI()
+
+        command_result = CommandResult(
+            title="Searching Users for name with a value Watkins Hammond",
+            result_list=[
+                UserResult(
+                    user=User(_id=12, name="Watkins Hammond", created_at="2016-07-21T12:26:16-10:00", verified=False),
+                    assigned_tickets=[
+                        Ticket(
+                            _id="35072cd7-e343-4d8e-a967-bbe32eb019cb",
+                            created_at="2016-04-07T05:09:10-10:00",
+                            type="task",
+                            subject="A Catastrophe in Macau",
+                            assignee_id=12,
+                            tags=['California', 'Palau', 'Kentucky', 'North Carolina']
+                        )
+                    ]
+                )
+            ]
+        )
+
+        ui.display_command_result(command_result)
+
+        out, _ = capfd.readouterr()
+
+        assert out == """Searching Users for name with a value Watkins Hammond
+
+_id: 12
+name: Watkins Hammond
+created_at: 2016-07-21T12:26:16-10:00
+verified: False
+
+Assigned Tickets
+
+_id: 35072cd7-e343-4d8e-a967-bbe32eb019cb
+created_at: 2016-04-07T05:09:10-10:00
+type: task
+subject: A Catastrophe in Macau
+assignee_id: 12
+tags: ['California', 'Palau', 'Kentucky', 'North Carolina']
+
+"""
+
+    def test_given_command_result_with_title_and_result_list_for_ticket_when_display_command_result_then_it_displays_title_and_result_list(self, capfd):
+        ui = searchapp.ui.UI()
+
+        command_result = CommandResult(
+            title="Searching Tickets for _id with a value 35072cd7-e343-4d8e-a967-bbe32eb019cb",
+            result_list=[
+                TicketResult(
+                    ticket=Ticket(
+                        _id="35072cd7-e343-4d8e-a967-bbe32eb019cb",
+                        created_at="2016-04-07T05:09:10-10:00",
+                        type="task",
+                        subject="A Catastrophe in Macau",
+                        assignee_id=12,
+                        tags=['California', 'Palau', 'Kentucky', 'North Carolina']
+                    ),
+                    assignee=User(_id=12, name="Watkins Hammond", created_at="2016-07-21T12:26:16-10:00", verified=False)
+                )
+            ]
+        )
+
+        ui.display_command_result(command_result)
+
+        out, _ = capfd.readouterr()
+
+        assert out == """Searching Tickets for _id with a value 35072cd7-e343-4d8e-a967-bbe32eb019cb
+
+
+_id: 35072cd7-e343-4d8e-a967-bbe32eb019cb
+created_at: 2016-04-07T05:09:10-10:00
+type: task
+subject: A Catastrophe in Macau
+assignee_id: 12
+tags: ['California', 'Palau', 'Kentucky', 'North Carolina']
+
+Assignee
+
+_id: 12
+name: Watkins Hammond
+created_at: 2016-07-21T12:26:16-10:00
+verified: False
+
+"""
+
+    def test_given_command_result_without_title_when_display_command_result_then_it_displays_result_list(self, capfd):
+        ui = searchapp.ui.UI()
+
+        command_result = CommandResult(
+            title=None,
+            result_list=(
+                UserSearchableFields(terms=["_id", "name"]),
+                TicketSearchableFields(terms=["_id", "subject"])
+            )
+        )
+
+        ui.display_command_result(command_result)
+
+        out, _ = capfd.readouterr()
+
+        assert out == """
+Search Users with
+_id
+name
+
+Search Tickets with
+_id
+subject
+"""
+
+    def test_given_command_result_with_title_and_empty_result_list_when_display_command_result_then_it_displays_no_result(self, capfd):
+        ui = searchapp.ui.UI()
+
+        command_result = CommandResult(
+            title="Searching Users for name with a value Foo",
+            result_list=[]
+        )
+
+        ui.display_command_result(command_result)
+
+        out, _ = capfd.readouterr()
+
+        assert out == """Searching Users for name with a value Foo
+No results found
+"""

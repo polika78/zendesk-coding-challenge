@@ -3,7 +3,7 @@ from typing import List
 
 
 @dataclass
-class TicketTerms:
+class TicketSearchableFields:
     terms: List[str]
 
     def __str__(self):

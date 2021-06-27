@@ -7,8 +7,8 @@ from searchapp.models.user import User
 from searchapp.models.ticket import Ticket
 from searchapp.models.search_result.user_result import UserResult
 from searchapp.models.search_result.ticket_result import TicketResult
-from searchapp.models.search_result.user_terms import UserTerms
-from searchapp.models.search_result.ticket_terms import TicketTerms
+from searchapp.models.search_result.user_searchable_fields import UserSearchableFields
+from searchapp.models.search_result.ticket_searchable_fields import TicketSearchableFields
 
 
 class TestSearchService:
@@ -301,7 +301,7 @@ class TestSearchService:
         user_repo = UserRepo()
         ticket_repo = TicketRepo()
         search_service = SearchService(user_repo, ticket_repo)
-        expected_result = UserTerms(
+        expected_result = UserSearchableFields(
             terms=["_id", "name", "created_at", "verified"]
         )
         assert search_service.get_user_search_terms() == expected_result
@@ -311,7 +311,7 @@ class TestSearchService:
         user_repo = UserRepo()
         ticket_repo = TicketRepo()
         search_service = SearchService(user_repo, ticket_repo)
-        expected_result = TicketTerms(
+        expected_result = TicketSearchableFields(
             terms=["_id", "created_at", "type", "subject", "assignee_id", "tags"]
         )
         assert search_service.get_ticket_search_terms() == expected_result

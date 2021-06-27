@@ -1,4 +1,6 @@
 
+from searchapp.models.search_result.command_result import CommandResult
+
 class UI:
     WELCOME_MESSAGE="""
 Welcome to Zendesk Search
@@ -42,3 +44,11 @@ Type 'quit' to exit at any time, Press 'Enter' to continue
         elif entry == '2':
             return 'list_searchable_fields', []
         return 'undefined', []
+
+    def display_command_result(self, command_result: CommandResult) ->  None:
+        if command_result.title:
+            print(command_result.title)
+        if not command_result.result_list:
+            print("No results found")
+        for result in command_result.result_list:
+            print(result)

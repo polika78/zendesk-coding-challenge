@@ -3,7 +3,7 @@ from typing import List
 
 
 @dataclass
-class UserTerms:
+class UserSearchableFields:
     terms: List[str]
 
     def __str__(self):

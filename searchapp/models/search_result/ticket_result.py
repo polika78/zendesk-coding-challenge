@@ -12,5 +12,5 @@ class TicketResult:
     def __str__(self):
         return f"""
 {self.ticket}
-Assignee User
+Assignee
 {self.assignee}"""

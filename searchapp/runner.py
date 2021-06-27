@@ -34,9 +34,11 @@ def main():
         if entry == 'quit':
             break
 
+        command, args = ui.parse_command(entry, sub_entries)
+
         try:
-            command, args = ui.parse_command(entry, sub_entries)
-            command_handler.handle(command, args)
+            command_result = command_handler.handle(command, args)
+            ui.display_command_result(command_result)
         except CommandNotFoundError:
             print("You selected wrong command. Please follow the instructions.")
         except UnknownSearchTermError:

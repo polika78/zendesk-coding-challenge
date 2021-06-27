@@ -12,5 +12,6 @@ class UserResult:
     def __str__(self):
         return '\n'.join([
             f"{self.user}",
+            "Assigned Tickets",
             *[f"{ticket}" for ticket in self.assigned_tickets]
         ])
