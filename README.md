@@ -33,8 +33,8 @@ $ mypy .
 * TicketRepo - As Tickets Repository it stores a data structure. And it provides methods to search
 * SearchService - This implements search logics for search requests
 * CommandHandler - As UI sends a command it creates a command and run it.
-* Commands - It calls search service to search results and displays results
-* UI - It gets inputs and parses command string and args to send them to command handler
+* Commands - It calls search service to search results and returns results to ui.
+* UI - It gets inputs and parses command string and args according to inputs to send them to command handler. And it displays command result.
 
 ![Design Diagram](./design-diagram.jpg)
 ## Data structure for repo
