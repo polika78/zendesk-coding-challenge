@@ -9,6 +9,7 @@ This is an application which enables for user to search users and tickets with t
 * type checking - mypy
 * Docker
     - Recommend to use dockerised scripts to run app and test
+    - [Install Docker](https://docs.docker.com/v17.12/install/)
 
 ## How to run test
 
@@ -68,8 +69,4 @@ This data structure gives O(n) complexity for searching by using hashmap. But it
 | what | cons | pros |
 |---|---|---|
 |RepoBuilder will update indexed map data structure for each field|It requires calling building function multiple times, so it will take more time compared with building all fields indexed map with one building call|It can just store required fields indexed map, so it could save memory.|
-
-
-## How to run application
-
-
+|Indexed map is storing data id references|When user searches fields, original data should be found by ids.|It can save storage size for indexed map data.|
