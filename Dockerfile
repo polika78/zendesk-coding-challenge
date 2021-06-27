@@ -1,6 +1,6 @@
 FROM            python:3.9-slim as base
 
-WORKDIR         /opt/code/searchapp/
+WORKDIR         /opt/code/
 
 RUN             pip install -U pip
 

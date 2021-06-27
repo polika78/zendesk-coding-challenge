@@ -70,3 +70,16 @@ This data structure gives O(n) complexity for searching by using hashmap. But it
 |---|---|---|
 |RepoBuilder will update indexed map data structure for each field|It requires calling building function multiple times, so it will take more time compared with building all fields indexed map with one building call|It can just store required fields indexed map, so it could save memory.|
 |Indexed map is storing data id references|When user searches fields, original data should be found by ids.|It can save storage size for indexed map data.|
+
+
+## Performance Test
+
+```
+$ ./scripts/run-with-big-data.sh
+```
+
+- With 500 times bigger users and tickets
+    - Loading time is very little slower.
+    - Searching time is same.
+    - Memory usages (7 MB vs 160 MB) - Data size (tickets(58 KB vs 20 MB) and users(9 Kb vs 3.8 MB))
+        - Memory increase(22 times) is not significant if data size (more than 300 times) increase is considered
