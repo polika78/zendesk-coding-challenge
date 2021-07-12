@@ -21,7 +21,7 @@ class TestUI:
 
         assert ui.input_handler() == ('1', ('1', '_id', '5'))
 
-    def test_given_inputs_when_input_handler_calls_returns_first_entry_and_sub_entries(self):
+    def test_given_inputs_with_invalid_second_input_when_input_handler_calls_returns_first_entry_and_sub_entries(self):
         input_values = ['1', '3', '_id']
     
         def mock_input(s):
